@@ -34,7 +34,6 @@ export default {
   methods: {
     saveSchedule () {
       const schedule = this.weeklySchedule ? 'weekly' : this.calendarSchedule ? 'calendar' : 'none'
-      console.log(schedule)
       setSchedule(schedule)
     }
   },
