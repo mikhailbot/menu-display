@@ -24,10 +24,6 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  font-weight: 400;
-}
-
 .el-menu--horizontal {
   padding-left: 100px;
   margin: auto;
@@ -35,5 +31,11 @@ h1 {
 
 .right-menu {
   float: right;
+}
+
+.settings-view {
+  width: 800px;
+  margin: auto;
+  padding: 3rem 1rem;
 }
 </style>
