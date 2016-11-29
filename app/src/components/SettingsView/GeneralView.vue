@@ -1,8 +1,7 @@
 <template>
   <div class="settings-view">
-    <div class="hostname">
-      Menu Display running on {{ this.hostname }}
-    </div>
+    
+    <h3>Menu Display running on {{ this.hostname }}</h3>
 
     <span class="title"><span>Active image:</span> menuboard-1</span>
     <span class="title"><span>Next scheduled image:</span> menuboard-2</span>

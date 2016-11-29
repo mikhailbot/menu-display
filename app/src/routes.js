@@ -11,6 +11,10 @@ export default [
       {
         path: 'images',
         component: require('components/SettingsView/ImagesView')
+      },
+      {
+        path: 'schedule',
+        component: require('components/SettingsView/ScheduleView')
       }
     ]
   },

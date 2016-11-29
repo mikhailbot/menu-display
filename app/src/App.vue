@@ -11,6 +11,10 @@ html,body {
   "Fira Sans", "Droid Sans", "Helvetica Neue",
   sans-serif;
 }
+
+h3 {
+  margin: 1rem 0;
+}
 </style>
 
 <template>
