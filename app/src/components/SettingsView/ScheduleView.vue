@@ -12,13 +12,45 @@
 </template>
 
 <script>
+import { getSettings, setSchedule } from '../../database.js'
+
 export default {
   name: 'settings-schedule',
+
+  beforeMount () {
+    const settings = getSettings()
+
+    this.weeklySchedule = settings.schedule === 'weekly'
+    this.calendarSchedule = settings.schedule === 'calendar'
+  },
 
   data () {
     return {
       weeklySchedule: true,
       calendarSchedule: false
+    }
+  },
+
+  methods: {
+    saveSchedule () {
+      const schedule = this.weeklySchedule ? 'weekly' : this.calendarSchedule ? 'calendar' : 'none'
+      console.log(schedule)
+      setSchedule(schedule)
+    }
+  },
+
+  watch: {
+    weeklySchedule (change) {
+      if (change) {
+        this.calendarSchedule = false
+      }
+      this.saveSchedule()
+    },
+    calendarSchedule (change) {
+      if (change) {
+        this.weeklySchedule = false
+      }
+      this.saveSchedule()
     }
   }
 }
