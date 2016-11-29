@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import Electron from 'vue-electron'
 import Router from 'vue-router'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-default/index.css'
 
 import App from './App'
 import routes from './routes'
 
 Vue.use(Electron)
 Vue.use(Router)
+Vue.use(ElementUI)
 Vue.config.debug = true
 
 const router = new Router({
