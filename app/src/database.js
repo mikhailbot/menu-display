@@ -1,8 +1,8 @@
 import { remote } from 'electron'
-// import fs from 'fs-extra'
+import fs from 'fs-extra'
 import path from 'path'
 import low from 'lowdb'
-// import uuid from 'node-uuid'
+import uuid from 'node-uuid'
 
 const app = remote.app
 const userDir = app.getPath('userData')
@@ -37,4 +37,41 @@ const setSchedule = (schedule) => {
   db.set('settings.schedule', schedule).value()
 }
 
-export { getSettings, setSchedule }
+const getImages = () => {
+  return db.get('images').value()
+}
+
+const uploadImage = (filepath, callback) => {
+  const newFilePath = path.resolve(userDir, 'images', path.basename(filepath))
+  const filename = path.basename(filepath)
+
+  fs.copy(filepath, newFilePath, (error) => {
+    if (error) {
+      return callback(error, null)
+    }
+    db.get('images').push({
+      id: uuid(),
+      filename: filename,
+      filepath: newFilePath
+    }).value()
+
+    // Return new array
+    return callback(null, db.get('images').value())
+  })
+}
+
+const removeImage = (id, callback) => {
+  const image = db.get('images').find({ id: id }).value()
+
+  fs.remove(image.filepath, (error) => {
+    if (error) {
+      return callback(error, null)
+    }
+    db.get('images').remove({ id: id }).value()
+
+    // Return new array
+    return callback(null, db.get('images').value())
+  })
+}
+
+export { getSettings, setSchedule, getImages, uploadImage, removeImage }
