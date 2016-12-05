@@ -33,6 +33,15 @@ const getSettings = () => {
   return db.get('settings').value()
 }
 
+const setActive = (imageId) => {
+  db.set('settings.activeImage', imageId).value()
+}
+
+const getActive = () => {
+  const activeImage = db.get('settings').value().activeImage
+  return db.get('images').find({ id: activeImage }).value()
+}
+
 const setSchedule = (schedule) => {
   db.set('settings.schedule', schedule).value()
 }
@@ -74,4 +83,4 @@ const removeImage = (id, callback) => {
   })
 }
 
-export { getSettings, setSchedule, getImages, uploadImage, removeImage }
+export { getSettings, getActive, setActive, setSchedule, getImages, uploadImage, removeImage }
