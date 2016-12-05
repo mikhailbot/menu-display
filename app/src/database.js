@@ -38,12 +38,12 @@ const setSchedule = (schedule) => {
 }
 
 const getImages = () => {
-  return db.get('images').value()
+  return db.get('images').sortBy('filename').value()
 }
 
 const uploadImage = (filepath, callback) => {
   const newFilePath = path.resolve(userDir, 'images', path.basename(filepath))
-  const filename = path.basename(filepath)
+  const filename = path.basename(filepath).toLowerCase()
 
   fs.copy(filepath, newFilePath, (error) => {
     if (error) {
@@ -56,7 +56,7 @@ const uploadImage = (filepath, callback) => {
     }).value()
 
     // Return new array
-    return callback(null, db.get('images').value())
+    return callback(null, db.get('images').sortBy('filename').value())
   })
 }
 
@@ -70,7 +70,7 @@ const removeImage = (id, callback) => {
     db.get('images').remove({ id: id }).value()
 
     // Return new array
-    return callback(null, db.get('images').value())
+    return callback(null, db.get('images').sortBy('filename').value())
   })
 }
 
