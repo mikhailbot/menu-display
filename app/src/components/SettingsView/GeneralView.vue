@@ -3,14 +3,14 @@
 
     <h3>Menu Display running on {{ this.hostname }}</h3>
 
-    <span class="title"><span>Active image:</span> {{ this.settings.activeImage }}</span>
+    <span class="title"><span>Active image:</span> {{ this.activeImage.filename }}</span>
     <span class="title"><span>Current schedule:</span> {{ this.settings.schedule }}</span>
   </div>
 </template>
 
 <script>
 import os from 'os'
-import { getSettings } from '../../database.js'
+import { getSettings, getActive } from '../../database.js'
 
 export default {
   name: 'settings-general',
@@ -28,6 +28,9 @@ export default {
   computed: {
     hostname () {
       return os.hostname()
+    },
+    activeImage () {
+      return getActive()
     }
   }
 }
