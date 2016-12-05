@@ -23,7 +23,12 @@ export default {
 
       // Showing images doesn't work in dev
       if (process.env.NODE_ENV === 'development') {
-        window.alert(`Active image is ${path}`)
+        this.$notify({
+          title: '[DEV] Active Image',
+          message: this.activeImage.filename,
+          type: 'info'
+        })
+
         path = 'https://unsplash.it/1280/720?image=20'
       }
 

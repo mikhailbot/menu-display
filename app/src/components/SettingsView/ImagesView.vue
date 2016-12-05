@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import path from 'path'
 import { remote } from 'electron'
 import { getSettings, getImages, uploadImage, removeImage, setActive } from '../../database'
 
@@ -57,9 +58,20 @@ export default {
           uploadImage(filenames[0], (error, result) => {
             if (error) {
               console.log(error)
+              this.$notify({
+                message: 'Failed to upload image, please try again',
+                type: 'error'
+              })
+            } else {
+              this.$notify({
+                title: 'Upload Successful',
+                message: `Uploaded ${path.basename(filenames[0])}`,
+                type: 'success'
+              })
+
+              vm.images = []
+              vm.images = result
             }
-            vm.images = []
-            vm.images = result
           })
         }
       })
@@ -68,13 +80,26 @@ export default {
       removeImage(id, (error, result) => {
         if (error) {
           console.log(error)
+          this.$notify({
+            message: 'Failed to remove image, please try again',
+            type: 'error'
+          })
+        } else {
+          this.$notify({
+            message: 'Removed image successfully',
+            type: 'success'
+          })
+          this.images = []
+          this.images = result
         }
-        this.images = []
-        this.images = result
       })
     },
     setActiveImage (id) {
       setActive(id)
+      this.$notify({
+        message: 'New active image set',
+        type: 'success'
+      })
     }
   }
 }
