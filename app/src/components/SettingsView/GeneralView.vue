@@ -1,17 +1,29 @@
 <template>
   <div class="settings-view">
-    
+
     <h3>Menu Display running on {{ this.hostname }}</h3>
 
-    <span class="title"><span>Active image:</span> menuboard-1</span>
-    <span class="title"><span>Next scheduled image:</span> menuboard-2</span>
+    <span class="title"><span>Active image:</span> {{ this.settings.activeImage }}</span>
+    <span class="title"><span>Current schedule:</span> {{ this.settings.schedule }}</span>
   </div>
 </template>
 
 <script>
 import os from 'os'
+import { getSettings } from '../../database.js'
+
 export default {
   name: 'settings-general',
+
+  beforeMount () {
+    this.settings = getSettings()
+  },
+
+  data () {
+    return {
+      settings: {}
+    }
+  },
 
   computed: {
     hostname () {
