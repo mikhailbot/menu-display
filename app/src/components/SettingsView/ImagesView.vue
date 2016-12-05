@@ -5,8 +5,16 @@
       <h3>Available Images</h3>
       <div v-for="image in images">
         <div class="image">
-          <span class="image-name">{{ image.filename }}</span>
-          <el-button type="danger" size="small" icon="delete" v-on:click="removeImage(image.id)"></el-button>
+          <div class="image-name">{{ image.filename }}</div>
+          <div class="image-buttons">
+            <span v-if="settings.activeImage == image.id">
+              <el-button type="success" size="small" icon="star-on"> Active </el-button>
+            </span>
+            <span v-else>
+              <el-button type="default" size="small" icon="star-off" v-on:click="setActiveImage(image.id)">Make Active</el-button>
+            </span>
+            <el-button type="danger" size="small" icon="delete" v-on:click="removeImage(image.id)"> Delete </el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -18,7 +26,7 @@
 
 <script>
 import { remote } from 'electron'
-import { getImages, uploadImage, removeImage } from '../../database'
+import { getSettings, getImages, uploadImage, removeImage, setActive } from '../../database'
 
 const dialog = remote.dialog
 
@@ -27,11 +35,13 @@ export default {
 
   beforeMount () {
     this.getImagesList()
+    this.settings = getSettings()
   },
 
   data () {
     return {
-      images: []
+      images: [],
+      settings: {}
     }
   },
 
@@ -62,6 +72,9 @@ export default {
         this.images = []
         this.images = result
       })
+    },
+    setActiveImage (id) {
+      setActive(id)
     }
   }
 }
@@ -73,6 +86,16 @@ export default {
 }
 
 .image {
-  padding-bottom: 5px;
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.image-name {
+  width: 50%;
+}
+
+.image-buttons button {
+  width: 7rem;
 }
 </style>
