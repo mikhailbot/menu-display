@@ -30,13 +30,14 @@ db.defaults({
 }).value()
 
 const images = db.get('images')
+const weeklySchedule = db.get('weeklySchedule')
 
 const getSettings = () => {
   return db.get('settings').value()
 }
 
-const setActive = (imageId) => {
-  db.set('settings.activeImage', imageId).value()
+const setSchedule = (schedule) => {
+  db.set('settings.schedule', schedule).value()
 }
 
 const getActive = () => {
@@ -44,8 +45,8 @@ const getActive = () => {
   return images.find({ id: activeImage }).value()
 }
 
-const setSchedule = (schedule) => {
-  db.set('settings.schedule', schedule).value()
+const setActive = (imageId) => {
+  db.set('settings.activeImage', imageId).value()
 }
 
 const getImages = () => {
@@ -85,4 +86,13 @@ const removeImage = (id, callback) => {
   })
 }
 
-export { getSettings, getActive, setActive, setSchedule, getImages, uploadImage, removeImage }
+const getWeekly = () => {
+  return weeklySchedule.value()
+}
+
+const updateWeekly = (index, image) => {
+  db.get(`weeklySchedule.days[${index}]`).assign({ image: image }).value()
+  return weeklySchedule.value()
+}
+
+export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly }

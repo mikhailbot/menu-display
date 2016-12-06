@@ -5,6 +5,10 @@
       <h3>Weekly Schedule</h3> <el-switch v-model="weeklySchedule" on-text="" off-text=""></el-switch>
     </div>
 
+    <div v-if="weeklySchedule">
+      <weekly-schedule></weekly-schedule>
+    </div>
+
     <div class="schedule">
       <h3>Calendar Schedule</h3> <el-switch v-model="calendarSchedule" on-text="" off-text=""></el-switch>
     </div>
@@ -16,6 +20,10 @@ import { getSettings, setSchedule } from '../../database.js'
 
 export default {
   name: 'settings-schedule',
+
+  components: {
+    weeklySchedule: require('./ScheduleView/WeeklySchedule')
+  },
 
   beforeMount () {
     const settings = getSettings()
