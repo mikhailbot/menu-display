@@ -3,7 +3,7 @@
 
     <h3>Menu Display running on {{ this.hostname }}</h3>
 
-    <span class="title"><span>Active image:</span> {{ this.activeImage.filename }}</span>
+    <span class="title"><span>Active image:</span> {{ this.activeImageFilename  }}</span>
     <span class="title"><span>Current schedule:</span> {{ this.settings.schedule }}</span>
   </div>
 </template>
@@ -31,6 +31,9 @@ export default {
     },
     activeImage () {
       return getActive()
+    },
+    activeImageFilename () {
+      return this.activeImage ? this.activeImage.filename : 'No active image'
     }
   }
 }
