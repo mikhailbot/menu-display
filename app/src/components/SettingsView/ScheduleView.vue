@@ -12,6 +12,10 @@
     <div class="schedule">
       <h3>Calendar Schedule</h3> <el-switch v-model="calendarSchedule" on-text="" off-text=""></el-switch>
     </div>
+
+    <div v-if="calendarSchedule">
+      <calendar-schedule></calendar-schedule>
+    </div>
   </div>
 </template>
 
@@ -22,7 +26,8 @@ export default {
   name: 'settings-schedule',
 
   components: {
-    weeklySchedule: require('./ScheduleView/WeeklySchedule')
+    weeklySchedule: require('./ScheduleView/WeeklySchedule'),
+    calendarSchedule: require('./ScheduleView/CalendarSchedule')
   },
 
   beforeMount () {

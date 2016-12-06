@@ -14,13 +14,7 @@
 export default {
   name: 'image-selector',
 
-  props: [ 'day', 'images' ],
-
-  data () {
-    return {
-      currentImage: ''
-    }
-  }
+  props: [ 'day', 'images' ]
 }
 </script>
 

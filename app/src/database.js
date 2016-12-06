@@ -93,15 +93,18 @@ const getWeekly = () => {
 
 const updateWeekly = (index, image) => {
   db.get(`weeklySchedule.days[${index}]`).assign({ image: image }).value()
-  return weeklySchedule.value()
 }
 
 const getCalendar = () => {
-  return calendarSchedule.value()
+  return calendarSchedule.sortBy('date').value()
 }
 
 const addCalendarSchedule = (date, image) => {
-  calendarSchedule.push({ date: date, image: image }).value()
+  calendarSchedule.push({
+    id: uuid(),
+    date: date,
+    image: image
+  }).value()
 }
 
 export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly, getCalendar, addCalendarSchedule }
