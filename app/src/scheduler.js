@@ -1,7 +1,7 @@
 import schedule from 'node-schedule'
 import { getSettings, getWeekly, setActive } from './database'
 
-schedule.scheduleJob('0 8 * * *', () => {
+const scheduleActiveImage = () => {
   const activeSchedule = getSettings().schedule
   const weeklySchedule = getWeekly()
 
@@ -13,4 +13,11 @@ schedule.scheduleJob('0 8 * * *', () => {
       setActive(image)
     }
   }
+}
+
+schedule.scheduleJob('0 8 * * *', () => {
+  scheduleActiveImage()
 })
+
+// Run once on startup
+scheduleActiveImage()
