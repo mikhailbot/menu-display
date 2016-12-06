@@ -31,14 +31,4 @@ export default {
 </script>
 
 <style scoped>
-.schedule {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
-}
-
-.day {
-  width: 150px;
-}
 </style>
