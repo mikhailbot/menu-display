@@ -29,6 +29,8 @@ db.defaults({
   }
 }).value()
 
+const images = db.get('images')
+
 const getSettings = () => {
   return db.get('settings').value()
 }
@@ -39,7 +41,7 @@ const setActive = (imageId) => {
 
 const getActive = () => {
   const activeImage = db.get('settings').value().activeImage
-  return db.get('images').find({ id: activeImage }).value()
+  return images.find({ id: activeImage }).value()
 }
 
 const setSchedule = (schedule) => {
@@ -47,7 +49,7 @@ const setSchedule = (schedule) => {
 }
 
 const getImages = () => {
-  return db.get('images').sortBy('filename').value()
+  return images.sortBy('filename').value()
 }
 
 const uploadImage = (filepath, callback) => {
@@ -58,28 +60,28 @@ const uploadImage = (filepath, callback) => {
     if (error) {
       return callback(error, null)
     }
-    db.get('images').push({
+    images.push({
       id: uuid(),
       filename: filename,
       filepath: newFilePath
     }).value()
 
     // Return new array
-    return callback(null, db.get('images').sortBy('filename').value())
+    return callback(null, images.sortBy('filename').value())
   })
 }
 
 const removeImage = (id, callback) => {
-  const image = db.get('images').find({ id: id }).value()
+  const image = images.find({ id: id }).value()
 
   fs.remove(image.filepath, (error) => {
     if (error) {
       return callback(error, null)
     }
-    db.get('images').remove({ id: id }).value()
+    images.remove({ id: id }).value()
 
     // Return new array
-    return callback(null, db.get('images').sortBy('filename').value())
+    return callback(null, images.sortBy('filename').value())
   })
 }
 
