@@ -1,6 +1,6 @@
 <template>
   <div class="image-selector">
-    <el-select v-model="currentImage" placeholder="Select">
+    <el-select v-model="day.image" placeholder="Select">
       <el-option
         v-for="image in images"
         :label="image.filename"
@@ -14,17 +14,11 @@
 export default {
   name: 'image-selector',
 
-  props: [ 'current', 'images', 'index' ],
+  props: [ 'day', 'images' ],
 
   data () {
     return {
-      currentImage: this.current
-    }
-  },
-
-  watch: {
-    currentImage () {
-      this.$emit('updateWeeklySchedule', this.index, this.currentImage)
+      currentImage: ''
     }
   }
 }

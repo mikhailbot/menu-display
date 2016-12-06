@@ -1,30 +1,19 @@
 <template>
   <div class="weekly-schedule">
     <div v-for="(day, index) in weeklySchedule.days">
-      <div class="schedule">
-        <div class="day">
-          {{ day.day }}
-        </div>
-        <div class="image">
-          <image-selector
-            :current="day.image"
-            :images="images"
-            :index="index"
-            v-on:updateWeeklySchedule="updateWeeklySchedule"></image-selector>
-        </div>
-      </div>
+      <weekly-schedule-set :day="day" :index="index"></weekly-schedule-set>
     </div>
   </div>
 </template>
 
 <script>
-import { getImages, getWeekly, updateWeekly } from '../../../database.js'
+import { getImages, getWeekly } from '../../../database.js'
 
 export default {
   name: 'weekly-schedule',
 
   components: {
-    imageSelector: require('./ImageSelector')
+    weeklyScheduleSet: require('./WeeklyScheduleSet')
   },
 
   data () {
@@ -37,17 +26,6 @@ export default {
   beforeMount () {
     this.weeklySchedule = getWeekly()
     this.images = getImages()
-  },
-
-  methods: {
-    updateWeeklySchedule (day, image) {
-      const newSchedule = updateWeekly(day, image)
-      this.weeklySchedule = newSchedule
-      this.$notify({
-        message: 'Updated weekly schedule!',
-        type: 'success'
-      })
-    }
   }
 }
 </script>
