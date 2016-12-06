@@ -9,11 +9,12 @@
           <div class="image-buttons">
             <span v-if="settings.activeImage == image.id">
               <el-button type="success" size="small" icon="star-on"> Active </el-button>
+              <el-button type="danger" size="small" icon="delete" :disabled="true"> Delete </el-button>
             </span>
             <span v-else>
               <el-button type="default" size="small" icon="star-off" v-on:click="setActiveImage(image.id)">Make Active</el-button>
+              <el-button type="danger" size="small" icon="delete" v-on:click="removeImage(image.id)"> Delete </el-button>
             </span>
-            <el-button type="danger" size="small" icon="delete" v-on:click="removeImage(image.id)"> Delete </el-button>
           </div>
         </div>
       </div>
