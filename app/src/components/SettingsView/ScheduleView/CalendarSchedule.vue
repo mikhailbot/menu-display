@@ -26,13 +26,21 @@ export default {
 
   data () {
     return {
-      calendarSchedule: getCalendar()
+      unsortedDates: getCalendar()
+    }
+  },
+
+  computed: {
+    calendarSchedule () {
+      return this.unsortedDates.sort((a, b) => {
+        return b - a
+      })
     }
   },
 
   methods: {
     updateCalendarSchedule () {
-      this.calendarSchedule = getCalendar()
+      this.unsortedDates = getCalendar()
     }
   }
 

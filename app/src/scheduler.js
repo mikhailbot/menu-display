@@ -1,9 +1,11 @@
+import moment from 'moment'
 import schedule from 'node-schedule'
-import { getSettings, getWeekly, setActive } from './database'
+import { getSettings, getWeekly, getCalendar, setActive } from './database'
 
 const scheduleActiveImage = () => {
   const activeSchedule = getSettings().schedule
   const weeklySchedule = getWeekly()
+  const calendarySchedule = getCalendar()
 
   if (activeSchedule === 'weekly') {
     const today = new Date().getDay()
@@ -12,6 +14,14 @@ const scheduleActiveImage = () => {
     if (image) {
       setActive(image)
     }
+  } else if (activeSchedule === 'calendar') {
+    const today = moment()
+
+    const schedulesBeforeIncludingToday = calendarySchedule.filter((schedule) => {
+      return moment(schedule.date).isSameOrBefore(today, 'day')
+    })
+
+    setActive(schedulesBeforeIncludingToday[schedulesBeforeIncludingToday.length - 1].image)
   }
 }
 
