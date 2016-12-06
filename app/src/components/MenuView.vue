@@ -19,13 +19,21 @@ export default {
       return getActive()
     },
     backgroundImage () {
-      let path = this.activeImage.filepath
+      let path = ''
+      let filename = ''
+      if (this.activeImage) {
+        path = this.activeImage.filepath
+        filename = this.activeImage.filename
+      } else {
+        path = ''
+        filename = 'no-active-image'
+      }
 
       // Showing images doesn't work in dev
       if (process.env.NODE_ENV === 'development') {
         this.$notify({
           title: '[DEV] Active Image',
-          message: this.activeImage.filename,
+          message: filename,
           type: 'info'
         })
 
