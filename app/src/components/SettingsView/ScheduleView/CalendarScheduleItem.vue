@@ -6,12 +6,15 @@
   <div class="item-image">
     <strong>Menuboard: </strong> {{ imageName }}
   </div>
+  <div class="item-remote">
+    <el-button type="danger" icon="delete" size="small" @click="remove"> Delete</el-button>
+  </div>
 </div>
 </template>
 
 <script>
 import moment from 'moment'
-import { getImages } from '../../../database.js'
+import { getImages, removeCalendar } from '../../../database.js'
 
 export default {
   name: 'calendar-schedule-item',
@@ -39,6 +42,17 @@ export default {
 
       return result
     }
+  },
+
+  methods: {
+    remove () {
+      removeCalendar(this.item.id)
+      this.$emit('updateCalendarSchedule')
+      this.$notify({
+        message: 'Removed scheduled menuboard!',
+        type: 'success'
+      })
+    }
   }
 
 }
@@ -52,7 +66,16 @@ export default {
   margin-top: 1rem;
 }
 
+.item-date {
+  width: 13rem
+}
+
 .item-image {
   margin: 0 1rem;
+  width: 22rem;
+}
+
+.item-remove {
+  width: 7rem;
 }
 </style>

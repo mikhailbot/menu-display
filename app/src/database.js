@@ -107,4 +107,8 @@ const addCalendarSchedule = (date, image) => {
   }).value()
 }
 
-export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly, getCalendar, addCalendarSchedule }
+const removeCalendar = (id) => {
+  calendarSchedule.remove({ id: id }).value()
+}
+
+export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly, getCalendar, addCalendarSchedule, removeCalendar }

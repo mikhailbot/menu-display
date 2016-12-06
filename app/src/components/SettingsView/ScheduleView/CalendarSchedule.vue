@@ -5,9 +5,9 @@
       <calendar-schedule-set v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-set>
     </div>
     <div class="view-schedule">
-      <h4>Currently scheduled boards:</h4>
+      <h4>Upcoming scheduled boards:</h4>
       <div v-for="item in calendarSchedule">
-        <calendar-schedule-item :item="item"></calendar-schedule-item>
+        <calendar-schedule-item :item="item" v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-item>
       </div>
     </div>
   </div>
@@ -40,5 +40,15 @@ export default {
 </script>
 
 <style scoped>
+.add-schedule {
+  margin: 1rem 0;
+}
 
+.add-schedule h4 {
+  margin: 1rem 0;
+}
+
+.view-schedule {
+  margin: 2rem 0;
+}
 </style>
