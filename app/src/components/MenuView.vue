@@ -65,6 +65,7 @@ export default {
 .menu-view {
   width: 100vw;
   height: 100vh;
+  cursor: none;
 }
 
 .menu-image {

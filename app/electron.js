@@ -20,10 +20,19 @@ function createWindow () {
   /**
    * Initial window options
    */
-  mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800
-  })
+
+   if (process.env.NODE_ENV === 'development') {
+    mainWindow = new BrowserWindow({
+      height: 600,
+      width: 800
+    })
+  } else {
+    mainWindow = new BrowserWindow({
+      height: 600,
+      width: 800,
+      fullscreen: true
+    })
+  }
 
   mainWindow.loadURL(config.url)
 

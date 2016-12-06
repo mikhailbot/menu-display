@@ -5,7 +5,8 @@
       <el-menu-item index="/settings/general">General</el-menu-item>
       <el-menu-item index="/settings/images">Images</el-menu-item>
       <el-menu-item index="/settings/schedule">Schedule</el-menu-item>
-      <el-menu-item index="/" class="right-menu">Exit</el-menu-item>
+      <li @click="quit" class="el-menu-item right-menu">Quit App</li>
+      <el-menu-item index="/" class="right-menu">Return to Menuboard</el-menu-item>
     </el-menu>
 
     <router-view></router-view>
@@ -14,11 +15,19 @@
 </template>
 
 <script>
+import { remote } from 'electron'
+
 export default {
   name: 'settings',
 
   mounted () {
     this.$router.push(this.$children[0].activeIndex)
+  },
+
+  methods: {
+    quit () {
+      remote.app.quit()
+    }
   }
 }
 </script>
