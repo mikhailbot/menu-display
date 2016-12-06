@@ -46,7 +46,7 @@ export default {
       }
 
       return {
-        'background': `url("${path}")`,
+        'background': `url("${path.replace(/\\/g, '\\\\')}")`,
         'background-position': 'center',
         'background-size': 'cover'
       }

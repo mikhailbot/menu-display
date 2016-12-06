@@ -1,7 +1,7 @@
 import schedule from 'node-schedule'
 import { getSettings, getWeekly, setActive } from './database'
 
-schedule.scheduleJob('*/15 * * * * *', () => {
+schedule.scheduleJob('0 8 * * *', () => {
   const activeSchedule = getSettings().schedule
   const weeklySchedule = getWeekly()
 
