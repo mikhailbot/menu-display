@@ -16,6 +16,11 @@ export default {
 
   computed: {
     activeImage () {
+      // Check every hour for new active image
+      setInterval(() => {
+        return getActive()
+      }, 3600000)
+
       return getActive()
     },
     backgroundImage () {
