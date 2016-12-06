@@ -31,6 +31,7 @@ db.defaults({
 
 const images = db.get('images')
 const weeklySchedule = db.get('weeklySchedule')
+const calendarSchedule = db.get('startDates')
 
 const getSettings = () => {
   return db.get('settings').value()
@@ -95,4 +96,12 @@ const updateWeekly = (index, image) => {
   return weeklySchedule.value()
 }
 
-export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly }
+const getCalendar = () => {
+  return calendarSchedule.value()
+}
+
+const addCalendarSchedule = (date, image) => {
+  calendarSchedule.push({ date: date, image: image }).value()
+}
+
+export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly, getCalendar, addCalendarSchedule }
