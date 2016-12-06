@@ -72,7 +72,7 @@ export default {
 
 .item-image {
   margin: 0 1rem;
-  width: 22rem;
+  width: 25rem;
 }
 
 .item-remove {
