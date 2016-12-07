@@ -19,7 +19,7 @@ export default {
       // Check every hour for new active image
       setInterval(() => {
         return getActive()
-      }, 3600000)
+      }, 1000 * 60 * 10)
 
       return getActive()
     },

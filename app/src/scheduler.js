@@ -27,7 +27,7 @@ const scheduleActiveImage = () => {
   }
 }
 
-schedule.scheduleJob('0 8 * * *', () => {
+schedule.scheduleJob('0 6 * * *', () => {
   scheduleActiveImage()
 })
 
