@@ -3,7 +3,7 @@
 
     <el-menu default-active="/settings/general" class="el-menu" mode="horizontal" :router="true" theme="dark">
       <el-menu-item index="/settings/general">General</el-menu-item>
-      <el-menu-item index="/settings/images">Images</el-menu-item>
+      <el-menu-item index="/settings/images">Menuboards</el-menu-item>
       <el-menu-item index="/settings/schedule">Schedule</el-menu-item>
       <li @click="quit" class="el-menu-item right-menu">Quit App</li>
       <el-menu-item index="/" class="right-menu">Return to Menuboard</el-menu-item>

@@ -2,7 +2,7 @@
   <div class="settings-view">
 
     <div class="list-images">
-      <h3>Available Images</h3>
+      <h3>Available Menuboards</h3>
       <div v-for="image in images">
         <div class="image">
           <div class="image-name">{{ image.filename }}</div>
