@@ -26,11 +26,12 @@ export default {
     backgroundImage () {
       let path = ''
       let filename = ''
+
       if (this.activeImage) {
         path = this.activeImage.filepath
         filename = this.activeImage.filename
       } else {
-        path = ''
+        path = require('./western').image
         filename = 'no-active-image'
       }
 
