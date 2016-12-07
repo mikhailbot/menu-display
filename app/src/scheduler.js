@@ -21,7 +21,9 @@ const scheduleActiveImage = () => {
       return moment(schedule.date).isSameOrBefore(today, 'day')
     })
 
-    setActive(schedulesBeforeIncludingToday[schedulesBeforeIncludingToday.length - 1].image)
+    if (schedulesBeforeIncludingToday.length) {
+      setActive(schedulesBeforeIncludingToday[schedulesBeforeIncludingToday.length - 1].image)
+    }
   }
 }
 
