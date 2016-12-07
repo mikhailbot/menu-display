@@ -15,6 +15,7 @@ This project was generated from [electron-vue](https://github.com/SimulatedGREG/
 The project is built using [Electron](http://electron.atom.io/) and [Vue](https://vuejs.org/), and requires [Node.JS](https://nodejs.org/en/) `v5.10.0` or higher to be installed.
 
 
+
 ``` bash
 # install dependencies
 npm install
@@ -22,8 +23,14 @@ npm install
 # serve with hot reload at localhost:9080
 npm run dev
 
-# build electron app for production
+# build electron app for production for all platforms
 npm run build
+
+# build elecrtron app for production for win32 x64
+npm run build:win32
+
+# build electron app for production for arm (raspberry pi)
+npm run build:arm
 
 # lint all JS/Vue component files in `app/src`
 npm run lint

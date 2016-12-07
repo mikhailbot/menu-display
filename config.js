@@ -17,7 +17,7 @@ let config = {
   // electron-packager options
   // Docs: https://simulatedgreg.gitbooks.io/electron-vue/content/docs/building_your_app.html
   building: {
-    arch: 'x64',
+    arch: process.env.ARCH_TARGET || 'all',
     asar: true,
     dir: path.join(__dirname, 'app'),
     icon: path.join(__dirname, 'app/icons/icon'),
