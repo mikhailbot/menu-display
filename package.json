@@ -1,6 +1,6 @@
 {
   "name": "menu-display",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A simple Menu Board application",
   "scripts": {
     "build": "node tasks/release.js",

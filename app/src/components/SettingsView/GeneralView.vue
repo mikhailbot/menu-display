@@ -1,7 +1,7 @@
 <template>
   <div class="settings-view">
 
-    <h3>Menu Display running on {{ this.hostname }}</h3>
+    <h3>Menu Display v{{ this.version }} running on {{ this.hostname }}</h3>
 
     <span class="title"><span>Active image:</span> {{ this.activeImageFilename  }}</span>
     <span class="title"><span>Current schedule:</span> {{ this.settings.schedule }}</span>
@@ -34,6 +34,9 @@ export default {
     },
     activeImageFilename () {
       return this.activeImage ? this.activeImage.filename : 'No active image'
+    },
+    version () {
+      return require('../../../package.json').version || '0.0.0'
     }
   }
 }
