@@ -3,6 +3,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import low from 'lowdb'
 import uuid from 'node-uuid'
+import moment from 'moment'
 
 const app = remote.app
 const userDir = app.getPath('userData')
@@ -95,8 +96,43 @@ const updateWeekly = (index, image) => {
   db.get(`weeklySchedule.days[${index}]`).assign({ image: image }).value()
 }
 
-const getCalendar = () => {
-  return calendarSchedule.sortBy('date').value()
+const getUpcomingCalendar = () => {
+  const schedules = calendarSchedule.sortBy('date').value()
+  const today = moment()
+  let activeSchedule = {}
+
+  const schedulesBeforeIncludingToday = schedules.filter((schedule) => {
+    return moment(schedule.date).isSameOrBefore(today, 'day')
+  })
+
+  if (schedulesBeforeIncludingToday.length) {
+    activeSchedule = schedulesBeforeIncludingToday[schedulesBeforeIncludingToday.length - 1]
+  }
+
+  let upcomingSchedules = schedules.filter((schedule) => {
+    return moment(schedule.date).isSameOrAfter(today, 'day')
+  })
+
+  if (activeSchedule.date) {
+    upcomingSchedules.unshift(activeSchedule)
+  }
+
+  return upcomingSchedules
+}
+
+const getPreviousCalendar = () => {
+  const schedules = calendarSchedule.sortBy('date').value()
+  const today = moment()
+
+  let schedulesBeforeIncludingToday = schedules.filter((schedule) => {
+    return moment(schedule.date).isSameOrBefore(today, 'day')
+  })
+
+  if (schedulesBeforeIncludingToday.length) {
+    schedulesBeforeIncludingToday.pop()
+  }
+
+  return schedulesBeforeIncludingToday
 }
 
 const addCalendarSchedule = (date, image) => {
@@ -111,4 +147,4 @@ const removeCalendar = (id) => {
   calendarSchedule.remove({ id: id }).value()
 }
 
-export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly, getCalendar, addCalendarSchedule, removeCalendar }
+export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly, getUpcomingCalendar, getPreviousCalendar, addCalendarSchedule, removeCalendar }

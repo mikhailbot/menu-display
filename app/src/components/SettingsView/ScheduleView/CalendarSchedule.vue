@@ -4,9 +4,15 @@
       <h4>Add new scheduled board</h4>
       <calendar-schedule-set v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-set>
     </div>
-    <div class="view-schedule">
+    <div class="view-upcoming-schedule">
       <h4>Upcoming scheduled boards:</h4>
-      <div v-for="item in calendarSchedule">
+      <div v-for="item in upcomingCalendarSchedule">
+        <calendar-schedule-item :item="item" v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-item>
+      </div>
+    </div>
+    <div class="view-previous-schedule">
+      <h4>Previously scheduled boards:</h4>
+      <div v-for="item in previousCalendarSchedule">
         <calendar-schedule-item :item="item" v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-item>
       </div>
     </div>
@@ -14,25 +20,31 @@
 </template>
 
 <script>
-import { getCalendar } from '../../../database.js'
+import { getUpcomingCalendar, getPreviousCalendar } from '../../../database.js'
 
 export default {
   name: 'calendar-schedule',
 
   components: {
-    calendarScheduleSet: require('./CalendarScheduleSet'),
-    calendarScheduleItem: require('./CalendarScheduleItem')
+    calendarScheduleSet: require('./CalendarSchedule/CalendarScheduleSet'),
+    calendarScheduleItem: require('./CalendarSchedule/CalendarScheduleItem')
   },
 
   data () {
     return {
-      unsortedDates: getCalendar()
+      unsortedUpcoming: getUpcomingCalendar(),
+      unsortedPrevious: getPreviousCalendar()
     }
   },
 
   computed: {
-    calendarSchedule () {
-      return this.unsortedDates.sort((a, b) => {
+    upcomingCalendarSchedule () {
+      return this.unsortedUpcoming.sort((a, b) => {
+        return b - a
+      })
+    },
+    previousCalendarSchedule () {
+      return this.unsortedPrevious.sort((a, b) => {
         return b - a
       })
     }
@@ -40,7 +52,8 @@ export default {
 
   methods: {
     updateCalendarSchedule () {
-      this.unsortedDates = getCalendar()
+      this.unsortedUpcoming = getUpcomingCalendar()
+      this.unsortedPrevious = getPreviousCalendar()
     }
   }
 
@@ -56,7 +69,7 @@ export default {
   margin: 1rem 0;
 }
 
-.view-schedule {
+.view-upcoming-schedule {
   margin: 2rem 0;
 }
 </style>

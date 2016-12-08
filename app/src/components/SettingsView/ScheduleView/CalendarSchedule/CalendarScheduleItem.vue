@@ -1,20 +1,29 @@
 <template>
 <div class="calendar-schedule-item">
-  <div class="item-date">
-    <strong>Date: </strong> {{ itemDate }}
+  <div class="left-column">
+    <div class="item-date">
+      <strong>Date: </strong> {{ itemDate }}
+    </div>
+    <div class="item-image">
+      <strong>Menuboard: </strong> {{ imageName }}
+    </div>
   </div>
-  <div class="item-image">
-    <strong>Menuboard: </strong> {{ imageName }}
-  </div>
-  <div class="item-remote">
-    <el-button type="danger" icon="delete" size="small" @click="remove"> Delete</el-button>
+  <div class="right-column">
+    <div class="item-remote">
+      <div class="item-edit">
+        <el-button type="info" :plain="true" icon="edit" size="small" :disabled="true"> Edit</el-button>
+      </div>
+      <div class="item-delete">
+        <el-button type="danger" :plain="true" icon="delete" size="small" @click="remove"> Delete</el-button>
+      </div>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
 import moment from 'moment'
-import { getImages, removeCalendar } from '../../../database.js'
+import { getImages, removeCalendar } from '../../../../database.js'
 
 export default {
   name: 'calendar-schedule-item',
@@ -66,16 +75,19 @@ export default {
   margin-top: 1rem;
 }
 
-.item-date {
-  width: 13rem
+.left-column {
+  width: 30rem;
 }
 
-.item-image {
-  margin: 0 1rem;
-  width: 25rem;
+.left-column div {
+  margin-top: 0.5rem;
 }
 
-.item-remove {
+.right-column div {
+  margin-top: 0.25rem;
+}
+
+.right-column div button {
   width: 7rem;
 }
 </style>

@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import { getImages, addCalendarSchedule } from '../../../database'
+import { getImages, addCalendarSchedule } from '../../../../database'
 
 export default {
   name: 'calendar-schedule-set',
 
   components: {
-    imageSelector: require('./ImageSelector')
+    imageSelector: require('../ImageSelector')
   },
 
   data () {
