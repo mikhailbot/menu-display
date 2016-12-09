@@ -11,13 +11,14 @@
   <div class="right-column">
     <div class="item-remote">
       <div class="item-edit">
-        <el-button type="info" :plain="true" icon="edit" size="small" :disabled="true"> Edit</el-button>
+        <el-button type="info" icon="edit" size="small" @click="edit.active = true"> Edit</el-button>
       </div>
       <div class="item-delete">
-        <el-button type="danger" :plain="true" icon="delete" size="small" @click="remove"> Delete</el-button>
+        <el-button type="danger" icon="delete" size="small" @click="remove"> Delete</el-button>
       </div>
     </div>
   </div>
+  <calendar-schedule-edit :id="item.id" :date="item.date" :image="item.image" :edit="edit" :images="images" v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-edit>
 </div>
 </template>
 
@@ -30,9 +31,16 @@ export default {
 
   props: [ 'item' ],
 
+  components: {
+    calendarScheduleEdit: require('./CalendarScheduleEdit')
+  },
+
   data () {
     return {
-      images: getImages()
+      images: getImages(),
+      edit: {
+        active: false
+      }
     }
   },
 
@@ -61,6 +69,9 @@ export default {
         message: 'Removed scheduled menuboard!',
         type: 'success'
       })
+    },
+    updateCalendarSchedule () {
+      this.$emit('updateCalendarSchedule')
     }
   }
 
