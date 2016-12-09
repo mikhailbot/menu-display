@@ -2,7 +2,7 @@
   <div class="settings-view">
 
     <div class="list-images">
-      <h3>Available Menuboards</h3>
+      <h2>Available Menuboards</h2>
       <div v-for="image in images">
         <div class="image">
           <div class="image-name">{{ image.filename }}</div>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <h3>Upload New Menuboard</h3>
+    <h2>Upload New Menuboard</h2>
     <el-button type="primary" size="large" v-on:click="uploadNewImage()"><i class="el-icon-upload"></i> Upload Image</el-button>
   </div>
 </template>

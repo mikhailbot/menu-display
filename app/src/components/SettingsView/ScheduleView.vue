@@ -2,7 +2,7 @@
   <div class="settings-view">
 
     <div class="schedule">
-      <h3>Weekly Schedule</h3> <el-switch v-model="weeklySchedule" on-text="" off-text=""></el-switch>
+      <h2>Weekly Schedule</h2> <el-switch v-model="weeklySchedule" on-text="" off-text=""></el-switch>
     </div>
 
     <div v-if="weeklySchedule">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="schedule">
-      <h3>Calendar Schedule</h3> <el-switch v-model="calendarSchedule" on-text="" off-text=""></el-switch>
+      <h2>Calendar Schedule</h2> <el-switch v-model="calendarSchedule" on-text="" off-text=""></el-switch>
     </div>
 
     <div v-if="calendarSchedule">
@@ -72,5 +72,9 @@ export default {
 .schedule {
   display: flex;
   align-items: center;
+}
+
+h2 {
+  margin: 1rem 1rem 1rem 0;
 }
 </style>

@@ -12,7 +12,7 @@ html,body {
   sans-serif;
 }
 
-h3 {
+h2, h3 {
   margin: 1rem 1rem 1rem 0;
 }
 </style>

@@ -1,10 +1,14 @@
 <template>
   <div class="settings-view">
 
-    <h3>Menu Display v{{ this.version }} running on {{ this.hostname }}</h3>
+    <h2>Menu Display v{{ this.version }} running on {{ this.hostname }}</h2>
 
-    <span class="title"><span>Active image:</span> {{ this.activeImageFilename  }}</span>
-    <span class="title"><span>Current schedule:</span> {{ this.settings.schedule }}</span>
+    <div class="title">
+      <h3>Active image:</h3> {{ this.activeImageFilename  }}
+    </div>
+    <div class="title">
+      <h3>Current schedule:</h3> {{ this.settings.schedule }}
+    </div>
   </div>
 </template>
 
@@ -43,18 +47,13 @@ export default {
 </script>
 
 <style scoped>
-.hostname {
+h2 {
   padding-bottom: 2rem;
-  font-size: 2rem;
 }
 
-.title {
-  display: block;
-  padding-bottom: 10px;
-}
-
-.title span {
-  font-size: 1.1rem;
-  font-weight: 600;
+h3 {
+  display: inline-block;
+  margin-right: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 </style>

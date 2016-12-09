@@ -1,17 +1,17 @@
 <template>
   <div class="calendar-view">
     <div class="add-schedule">
-      <h4>Add new scheduled board</h4>
+      <h3>Add new scheduled board</h3>
       <calendar-schedule-set v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-set>
     </div>
     <div class="view-upcoming-schedule">
-      <h4>Upcoming scheduled boards:</h4>
+      <h3>Upcoming scheduled boards:</h3>
       <div v-for="item in upcomingCalendarSchedule">
         <calendar-schedule-item :item="item" v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-item>
       </div>
     </div>
     <div class="view-previous-schedule">
-      <h4>Previously scheduled boards:</h4>
+      <h3>Previously scheduled boards:</h3>
       <div v-for="item in previousCalendarSchedule">
         <calendar-schedule-item :item="item" v-on:updateCalendarSchedule="updateCalendarSchedule"></calendar-schedule-item>
       </div>
@@ -65,7 +65,7 @@ export default {
   margin: 1rem 0;
 }
 
-.add-schedule h4 {
+.add-schedule h3 {
   margin: 1rem 0;
 }
 
