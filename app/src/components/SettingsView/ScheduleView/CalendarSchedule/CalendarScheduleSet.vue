@@ -34,14 +34,22 @@ export default {
     addSchedule () {
       if (this.schedule.date && this.schedule.image) {
         addCalendarSchedule(this.schedule.date, this.schedule.image)
-        this.$message({
-          message: 'Added new scheduled menuboard!',
-          type: 'success'
+        .then(() => {
+          this.$message({
+            message: 'Added new scheduled menuboard!',
+            type: 'success'
+          })
+          this.schedule = {
+            date: '',
+            image: ''
+          }
         })
-        this.schedule = {
-          date: '',
-          image: ''
-        }
+        .catch((error) => {
+          this.$message({
+            message: error,
+            type: 'warning'
+          })
+        })
         this.$emit('updateCalendarSchedule')
       }
     }

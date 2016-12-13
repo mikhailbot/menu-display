@@ -140,11 +140,18 @@ const getPreviousCalendar = () => {
 }
 
 const addCalendarSchedule = (date, image) => {
-  calendarSchedule.push({
-    id: uuid(),
-    date: date,
-    image: image
-  }).value()
+  return new Promise((resolve, reject) => {
+    if (calendarSchedule.find({ date: date }).value()) {
+      return reject('A schedule entry exists for this day already!')
+    } else {
+      calendarSchedule.push({
+        id: uuid(),
+        date: date,
+        image: image
+      }).value()
+      return resolve()
+    }
+  })
 }
 
 const removeCalendar = (id) => {

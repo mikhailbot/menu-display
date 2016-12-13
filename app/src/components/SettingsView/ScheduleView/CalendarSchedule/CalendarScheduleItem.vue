@@ -65,7 +65,6 @@ export default {
     remove () {
       this.$confirm('This will permanently delete the schedule entry, the menu board image however will not be deleted. Continue?', 'Danger', {
         confirmButtonText: 'Delete Schedule',
-        confirmButtonClass: 'el-button--danger',
         cancelButtonText: 'Cancel',
         type: 'danger'
       }).then(() => {
