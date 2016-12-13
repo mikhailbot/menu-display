@@ -65,7 +65,7 @@ export default {
     remove () {
       removeCalendar(this.item.id)
       this.$emit('updateCalendarSchedule')
-      this.$notify({
+      this.$message({
         message: 'Removed scheduled menuboard!',
         type: 'success'
       })

@@ -59,17 +59,15 @@ export default {
           uploadImage(filenames[0], (error, result) => {
             if (error) {
               console.log(error)
-              this.$notify({
+              this.$message({
                 message: 'Failed to upload image, please try again',
                 type: 'error'
               })
             } else {
-              this.$notify({
-                title: 'Upload Successful',
-                message: `Uploaded ${path.basename(filenames[0])}`,
-                type: 'success'
+              this.$message({
+                type: 'success',
+                message: `Uploaded ${path.basename(filenames[0])}`
               })
-
               vm.images = []
               vm.images = result
             }
@@ -78,26 +76,38 @@ export default {
       })
     },
     removeImage (id) {
-      removeImage(id, (error, result) => {
-        if (error) {
-          console.log(error)
-          this.$notify({
-            message: 'Failed to remove image, please try again',
-            type: 'error'
-          })
-        } else {
-          this.$notify({
-            message: 'Removed image successfully',
-            type: 'success'
-          })
-          this.images = []
-          this.images = result
-        }
+      this.$confirm('This will permanently delete the file as well as any schedule entries that point towards it. Continue?', 'Danger', {
+        confirmButtonText: 'Delete Image and Schedules',
+        confirmButtonClass: 'el-button--danger',
+        cancelButtonText: 'Cancel',
+        type: 'danger'
+      }).then(() => {
+        removeImage(id, (error, result) => {
+          if (error) {
+            console.log(error)
+            this.$message({
+              type: 'warning',
+              message: 'Failed to remove image, please try again'
+            })
+          } else {
+            this.$message({
+              type: 'success',
+              message: 'Removed image successfully'
+            })
+            this.images = []
+            this.images = result
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Delete canceled'
+        })
       })
     },
     setActiveImage (id) {
       setActive(id)
-      this.$notify({
+      this.$message({
         message: 'New active image set',
         type: 'success'
       })

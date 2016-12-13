@@ -50,9 +50,9 @@ export default {
         date: this.localDate,
         image: this.localImage.image
       })
-      this.$notify.success({
+      this.$message({
         message: 'Updated schedule entry!',
-        offset: 200
+        type: 'success'
       })
       this.edit.active = false
       this.$emit('updateCalendarSchedule')

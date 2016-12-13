@@ -37,7 +37,7 @@ export default {
 
       // Showing images doesn't work in dev
       if (process.env.NODE_ENV === 'development') {
-        this.$notify({
+        this.$message({
           title: '[DEV] Active Image',
           message: filename,
           type: 'info'

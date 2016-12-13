@@ -34,7 +34,7 @@ export default {
     addSchedule () {
       if (this.schedule.date && this.schedule.image) {
         addCalendarSchedule(this.schedule.date, this.schedule.image)
-        this.$notify({
+        this.$message({
           message: 'Added new scheduled menuboard!',
           type: 'success'
         })

@@ -37,7 +37,7 @@ export default {
       handler () {
         updateWeekly(this.index, this.schedule.image)
 
-        this.$notify({
+        this.$message({
           message: 'Updated weekly schedule!',
           type: 'success'
         })

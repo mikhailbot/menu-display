@@ -77,6 +77,10 @@ const uploadImage = (filepath, callback) => {
 const removeImage = (id, callback) => {
   const image = images.find({ id: id }).value()
 
+  // Check if image exists in either schedule and delete entries
+  calendarSchedule.remove({ image: id }).value()
+  weeklySchedule.find({ image: id }).assign({ image: '' }).value()
+
   fs.remove(image.filepath, (error) => {
     if (error) {
       return callback(error, null)
