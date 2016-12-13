@@ -114,7 +114,7 @@ const getUpcomingCalendar = () => {
   }
 
   let upcomingSchedules = schedules.filter((schedule) => {
-    return moment(schedule.date).isSameOrAfter(today, 'day')
+    return moment(schedule.date).isAfter(today, 'day')
   })
 
   if (activeSchedule.date) {
