@@ -63,11 +63,23 @@ export default {
 
   methods: {
     remove () {
-      removeCalendar(this.item.id)
-      this.$emit('updateCalendarSchedule')
-      this.$message({
-        message: 'Removed scheduled menuboard!',
-        type: 'success'
+      this.$confirm('This will permanently delete the schedule entry, the menu board image however will not be deleted. Continue?', 'Danger', {
+        confirmButtonText: 'Delete Schedule',
+        confirmButtonClass: 'el-button--danger',
+        cancelButtonText: 'Cancel',
+        type: 'danger'
+      }).then(() => {
+        removeCalendar(this.item.id)
+        this.$emit('updateCalendarSchedule')
+        this.$message({
+          message: 'Removed scheduled menuboard!',
+          type: 'success'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: 'Delete canceled'
+        })
       })
     },
     updateCalendarSchedule () {
