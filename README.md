@@ -2,9 +2,9 @@
 
 > A simple Menu Board application
 
-We have a need for simple static menu boards that show an image fullscreen on a TV. Currently we're either using CBORD's unsupported menu board system or a script that displays an image within Internet Explorer. This apps goal is to replace the second type of menu board; the hacky script ones.
+We have a need for simple static menu boards that show an image or video fullscreen on a TV. Currently we're either using CBORD's unsupported menu board system or a script that displays an image within Internet Explorer. This apps goal is to replace the second type of menu board; the hacky script ones.
 
-While providing the same basic feature of displaying an image fullscreen, it also adds the ability to schedule different boards for different days of the week or for boards to start displaying on specific dates.
+While providing the same basic feature of displaying an image or video fullscreen, it also adds the ability to schedule different boards for different days of the week or for boards to start displaying on specific dates.
 
 ![schedule display](./screenshots/menudisplay-schedule.png)
 
