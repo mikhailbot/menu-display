@@ -1,60 +1,80 @@
 <template>
   <div class="menu-view" @dblclick="goToSettings">
-    <div class="menu-image" v-bind:style="backgroundImage"></div>
+    <image-view v-if="image" :image="image"></image-view>
+    <video-view v-if="video" :video="video"></video-view>
   </div>
 </template>
 
 <script>
 import { getActive } from '../database.js'
+import ImageView from './MenuView/ImageView.vue'
+import VideoView from './MenuView/VideoView.vue'
 
 export default {
-  name: 'menu',
+  name: 'menu-view',
+
+  components: {
+    ImageView,
+    VideoView
+  },
 
   created: function () {
     window.addEventListener('keyup', this.goToSettingsEsc)
+
+    setInterval(() => {
+      return this.loadMenu()
+    }, 1000 * 60 * 10)
+
+    return this.loadMenu()
   },
 
-  computed: {
-    activeImage () {
-      // Check every hour for new active image
-      setInterval(() => {
-        return getActive()
-      }, 1000 * 60 * 10)
-
-      return getActive()
-    },
-    backgroundImage () {
-      let path = ''
-      let filename = ''
-
-      if (this.activeImage) {
-        path = this.activeImage.filepath
-        filename = this.activeImage.filename
-      } else {
-        path = require('./western').image
-        filename = 'no-active-image'
-      }
-
-      // Showing images doesn't work in dev
-      if (process.env.NODE_ENV === 'development') {
-        this.$message({
-          title: '[DEV] Active Image',
-          message: filename,
-          type: 'info'
-        })
-
-        path = 'https://unsplash.it/1280/720?image=20'
-      }
-
-      return {
-        'background': `url("${path.replace(/\\/g, '\\\\')}")`,
-        'background-position': 'center',
-        'background-size': 'cover'
-      }
+  data () {
+    return {
+      image: undefined,
+      video: undefined
     }
   },
 
   methods: {
+    loadMenu () {
+      const activeMenuboard = getActive()
+      const imageRegex = /([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$/
+      const videoRegex = /([a-zA-Z0-9\s_\\.\-\(\):])+(.mp4)$/
+
+      if (!activeMenuboard.filepath) {
+        this.image.filepath = require('./western').image
+        this.video = undefined
+      } else if (imageRegex.test(activeMenuboard.filepath)) {
+        this.image = activeMenuboard
+        this.video = undefined
+
+        // Showing images doesn't work in dev
+        if (process.env.NODE_ENV === 'development') {
+          this.$message({
+            title: '[DEV] Active Image',
+            message: activeMenuboard.filename,
+            type: 'info'
+          })
+
+          this.image.filepath = 'https://unsplash.it/1920/1080?image=20'
+        }
+      } else if (videoRegex.test(activeMenuboard.filepath)) {
+        this.video = activeMenuboard
+        this.image = undefined
+
+        // Showing video doesn't work in dev
+        if (process.env.NODE_ENV === 'development') {
+          this.$message({
+            title: '[DEV] Active Image',
+            message: activeMenuboard.filename,
+            type: 'info'
+          })
+
+          this.video.filepath = 'https://cdn-pro.dprcdn.net/files/acc_510434/kUh3Zy'
+        }
+      }
+    },
+
     goToSettings () {
       this.$router.push('/settings/general')
     },

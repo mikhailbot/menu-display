@@ -21,7 +21,10 @@
     </div>
 
     <h2>Upload New Menuboard</h2>
-    <el-button type="primary" size="large" v-on:click="uploadNewImage()"><i class="el-icon-upload"></i> Upload Image</el-button>
+    <el-button type="primary" size="large" v-on:click="uploadNewImage()"><i class="el-icon-upload"></i> Upload Image or Video</el-button>
+    <br>
+    <br>
+    <p>Please ensure images are in JPEG or PNG formats. For videos please ensure they are MP4 videos. If the video stutters or doesn't play back properly please reach out to Mikhail.</p>
   </div>
 </template>
 

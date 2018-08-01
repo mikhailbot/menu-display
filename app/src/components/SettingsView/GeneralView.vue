@@ -4,7 +4,7 @@
     <h2>Menu Display v{{ this.version }} running on {{ this.hostname }}</h2>
 
     <div class="title">
-      <h3>Active image:</h3> {{ this.activeImageFilename  }}
+      <h3>Active menuboard:</h3> {{ this.activeImageFilename  }}
     </div>
     <div class="title">
       <h3>Current schedule:</h3> {{ this.settings.schedule }}
@@ -37,7 +37,7 @@ export default {
       return getActive()
     },
     activeImageFilename () {
-      return this.activeImage ? this.activeImage.filename : 'No active image'
+      return this.activeImage ? this.activeImage.filename : 'No active menuboard'
     },
     version () {
       return require('../../../package.json').version || '0.0.0'
