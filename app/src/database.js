@@ -28,7 +28,7 @@ db.defaults({
       { day: 'Saturday', image: '' }
     ]
   }
-}).value()
+}).write()
 
 const images = db.get('images')
 const weeklySchedule = db.get('weeklySchedule')
@@ -39,7 +39,7 @@ const getSettings = () => {
 }
 
 const setSchedule = (schedule) => {
-  db.set('settings.schedule', schedule).value()
+  db.set('settings.schedule', schedule).write()
 }
 
 const getActive = () => {
@@ -48,7 +48,7 @@ const getActive = () => {
 }
 
 const setActive = (imageId) => {
-  db.set('settings.activeImage', imageId).value()
+  db.set('settings.activeImage', imageId).write()
 }
 
 const getImages = () => {
@@ -67,7 +67,7 @@ const uploadImage = (filepath, callback) => {
       id: uuid(),
       filename: filename,
       filepath: newFilePath
-    }).value()
+    }).write()
 
     // Return new array
     return callback(null, images.sortBy('filename').value())
@@ -78,14 +78,14 @@ const removeImage = (id, callback) => {
   const image = images.find({ id: id }).value()
 
   // Check if image exists in either schedule and delete entries
-  calendarSchedule.remove({ image: id }).value()
+  calendarSchedule.remove({ image: id }).write()
   weeklySchedule.find({ image: id }).assign({ image: '' }).value()
 
   fs.remove(image.filepath, (error) => {
     if (error) {
       return callback(error, null)
     }
-    images.remove({ id: id }).value()
+    images.remove({ id: id }).write()
 
     // Return new array
     return callback(null, images.sortBy('filename').value())
@@ -97,7 +97,7 @@ const getWeekly = () => {
 }
 
 const updateWeekly = (index, image) => {
-  db.get(`weeklySchedule.days[${index}]`).assign({ image: image }).value()
+  db.get(`weeklySchedule.days[${index}]`).assign({ image: image }).write()
 }
 
 const getUpcomingCalendar = () => {
@@ -148,18 +148,18 @@ const addCalendarSchedule = (date, image) => {
         id: uuid(),
         date: date,
         image: image
-      }).value()
+      }).write()
       return resolve()
     }
   })
 }
 
 const removeCalendar = (id) => {
-  calendarSchedule.remove({ id: id }).value()
+  calendarSchedule.remove({ id: id }).write()
 }
 
 const updateCalendar = (schedule) => {
-  calendarSchedule.find({ id: schedule.id }).assign({ date: schedule.date, image: schedule.image }).value()
+  calendarSchedule.find({ id: schedule.id }).assign({ date: schedule.date, image: schedule.image }).write()
 }
 
 export { getSettings, setSchedule, getActive, setActive, getImages, uploadImage, removeImage, getWeekly, updateWeekly, getUpcomingCalendar, getPreviousCalendar, addCalendarSchedule, removeCalendar, updateCalendar }
