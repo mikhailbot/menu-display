@@ -3,7 +3,7 @@
 
     <div class="list-images">
       <h2>Available Menuboards</h2>
-      <div v-for="image in images">
+      <div v-for="image in images" :key="image.filename">
         <div class="image">
           <div class="image-name">{{ image.filename }}</div>
           <div class="image-buttons">
